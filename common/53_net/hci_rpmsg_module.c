@@ -300,9 +300,9 @@ static void rx_thread(void *p1, void *p2, void *p3)
 		struct net_buf *buf;
 
 		buf = net_buf_get(&rx_queue, K_FOREVER);
-		NRF_P0->OUTSET = BIT(30);
+		//NRF_P0->OUTSET = BIT(30);
 		hci_rpmsg_send(buf, HCI_REGULAR_MSG);
-		NRF_P0->OUTCLR = BIT(30);
+		//NRF_P0->OUTCLR = BIT(30);
 	}
 }
 
@@ -448,7 +448,7 @@ int hci_rpmsg_run(void)
 
 		buf = net_buf_get(&rx_queue, K_FOREVER);
 		hci_rpmsg_send(buf, HCI_REGULAR_MSG);
-		NRF_P0->OUT ^= BIT(30);
+		//NRF_P0->OUT ^= BIT(30);
 	}
 	
 	return 0;

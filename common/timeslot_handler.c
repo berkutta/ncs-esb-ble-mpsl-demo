@@ -78,7 +78,7 @@ static mpsl_timeslot_signal_return_param_t *mpsl_timeslot_callback(mpsl_timeslot
 {
 	(void) session_id; // unused parameter
 	static bool timeslot_extension_failed;
-	NRF_P0->OUTSET = BIT(28);
+	//NRF_P0->OUTSET = BIT(28);
 	mpsl_timeslot_signal_return_param_t *p_ret_val = NULL;
 	switch (signal_type) {
 		case MPSL_TIMESLOT_SIGNAL_START:
@@ -224,7 +224,7 @@ static mpsl_timeslot_signal_return_param_t *mpsl_timeslot_callback(mpsl_timeslot
 			k_oops();
 			break;
 	}
-	NRF_P0->OUTCLR = BIT(28);
+	//NRF_P0->OUTCLR = BIT(28);
 	return p_ret_val;
 }
 
