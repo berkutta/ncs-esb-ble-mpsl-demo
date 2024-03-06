@@ -201,7 +201,7 @@ int app_esb_send(app_esb_data_t *tx_packet)
 	int ret = 0;
 	static struct esb_payload tx_payload;
 	tx_payload.pipe = 0;
-	tx_payload.noack = false;
+	tx_payload.noack = true;
 	memcpy(tx_payload.data, tx_packet->data, tx_packet->len);
 	tx_payload.length = tx_packet->len;
 	ret = k_msgq_put(&m_msgq_tx_payloads, &tx_payload, K_NO_WAIT);
