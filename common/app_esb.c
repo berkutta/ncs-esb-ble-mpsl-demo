@@ -114,9 +114,9 @@ static int esb_initialize(app_esb_mode_t mode)
 	/* These are arbitrary default addresses. In end user products
 	 * different addresses should be used for each set of devices.
 	 */
-	uint8_t base_addr_0[4] = {0xE7, 0xE7, 0xE7, 0xE7};
-	uint8_t base_addr_1[4] = {0xC2, 0xC2, 0xC2, 0xC2};
-	uint8_t addr_prefix[8] = {0xE7, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6, 0xC7, 0xC8};
+	uint8_t base_addr_0[4] = {0xE7, 0xE7, 0xE7, 0xAA};
+	uint8_t base_addr_1[4] = {0xC2, 0xC2, 0xC2, 0xAA};
+	uint8_t addr_prefix[8] = {0xE7, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6, 0xC7, 0xAA};
 
 	struct esb_config config = ESB_DEFAULT_CONFIG;
 
@@ -128,6 +128,7 @@ static int esb_initialize(app_esb_mode_t mode)
 	config.mode = (mode == APP_ESB_MODE_PTX) ? ESB_MODE_PTX : ESB_MODE_PRX;
 	config.tx_mode = ESB_TXMODE_MANUAL_START;
 	config.selective_auto_ack = true;
+	config.tx_output_power = ESB_TX_POWER_4DBM;
 
 	err = esb_init(&config);
 
@@ -149,6 +150,8 @@ static int esb_initialize(app_esb_mode_t mode)
 	if (err) {
 		return err;
 	}
+
+	esb_set_rf_channel(50);
 
 	NVIC_SetPriority(RADIO_IRQn, 0);
 
